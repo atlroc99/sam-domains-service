@@ -6,6 +6,6 @@ codeuri = "/Users/mohammadzaman/PycharmProjects/aws-serverless-alc-sandbox/sub-d
 runtime = "python3.8"
 source_md5 = ""
 packagetype = "Zip"
-functions = ["TestLambdaInvokation", "CheckSubDomainNameAvailibilityFunction", "GetInstanceStatusFunction", "GetRedisConnectionStatusFunction", "ReserveDomainNameFunction"]
+functions = ["TestLambdaInvokation", "CheckSubDomainNameAvailibilityFunction", "GetInstanceStatusFunction", "GetRedisConnectionStatusFunction", "ReserveDomainNameFunction", "ListReserveDomainNamesFunction"]
 
 [layer_build_definitions]

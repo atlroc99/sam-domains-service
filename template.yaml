@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description:
   sub-domain-services to look up instance status, sub domian name availability and reservation
-
+#f6jz3rblo7
 Globals:
   Function:
     Runtime: python3.8
