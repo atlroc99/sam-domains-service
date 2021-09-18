@@ -1,0 +1,121 @@
+// ModelName: TestResponse
+// application/json
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "for testing test endpoint",
+    "type": "object",
+    "properties": {
+        "message": {
+            "type":"string"
+        },
+        "sub_domain_name": {
+            "type": "string"
+        }
+    }
+}
+
+// Model name: DomainNameAvailabilityRequest
+// application/json
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "check domain name availability",
+    "type": "object",
+    "properties": {
+        "sub_domain_name": {
+            "type": "string"
+        }
+    },
+    "required": ["sub_domain_name"]
+}
+
+// Model Name: DomainNameAvailabilityResponse
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "check domain name availability",
+    "type": "object",
+    "properties": {
+        "isAvailable": {
+            "type": "boolean"
+        }
+    }
+}
+
+// // Model name: GetInstanceStatusRequest
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "get instance status associated with the given sub_domain_name ",
+    "type": "object",
+    "properties": {
+        "sub_domain_name": {
+            "type": "string"
+        }
+    },
+    "required": ["sub_domain_name"]
+}
+// application/json
+// Model name: GetInstanceStatusRequest
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "get instance status associated with the given sub_domain_name ",
+    "type": "array",
+    "items": {
+        "type":"object",
+        "properties":{
+            "color": {
+                "type" : "string"
+            },
+            "name": {
+                "type" : "string"
+            }
+        }
+    }
+}
+
+// Redis Status Response:
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "get redis connection status",
+    "type":"object",
+    "properties" : {
+        "isConnected" : {
+            "type": "boolean"
+        }
+    }
+}
+
+// ModelName: ReserveSubDomainName
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "get instance status associated with the given sub_domain_name ",
+    "type": "object",
+    "properties": {
+        "sub_domain_name": {
+            "type": "string"
+        }
+    }
+}
+
+// ModelName: ReserveSubDomainNameResponse
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "reserving sub_domain_name",
+    "type": "object",
+    "properties": {
+        "message": {
+            "type" : "string"
+        },
+        "reserved": {
+            "type" : "boolean"
+        },
+        "region": {
+            "type": "string"
+        },
+        "subDomainName": {
+            "type": "string"
+        },
+        "uuid": {
+            "type": "string"
+        }
+    }
+}
+

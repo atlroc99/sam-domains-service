@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description:
+  sub-domain-services to look up instance status, sub domian name availability and reservation
+
+Globals:
+  Function:
+    Runtime: python3.8
+    Timeout: 7
+    CodeUri: sub_domian_services/
+    VpcConfig:
+      SecurityGroupIds:
+        - sg-051be9e51402c3387
+      SubnetIds:
+        - subnet-0d87a26a84698baa3
+Resources:
+  TestLambdaInvokation:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: arn:aws:iam::829898772826:role/Sam-application-lambda-role
+      Handler: app.lambda_handler
+      Events:
+        TestAPI:
+          Type: Api
+          Properties:
+            Path: /instances/test/{path_name}
+            Method: GET
+  CheckSubDomainNameAvailibilityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: arn:aws:iam::829898772826:role/Sam-application-lambda-role
+      Handler: check_domain_availibility.lambda_handler
+      Events:
+        CheckSubDomainNameAvailibility:
+          Type: Api
+          Properties:
+            Path: /instances/check-domain-name
+            Method: POST
+  GetInstanceStatusFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: arn:aws:iam::829898772826:role/Sam-application-lambda-role
+      Handler: get_instance_status.lambda_handler
+      Events:
+        GetInstanceStatus:
+          Type: Api
+          Properties:
+            Path: /instances/status
+            Method: POST
+  GetRedisConnectionStatusFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: arn:aws:iam::829898772826:role/Sam-application-lambda-role
+      Handler: get_redis_connection_status.lambda_handler
+      Events:
+        GetRedisConnectionStatus:
+          Type: Api
+          Properties:
+            Path: /instances/redis/status
+            Method: GET
+  ReserveDomainNameFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: arn:aws:iam::829898772826:role/Sam-application-lambda-role
+      Handler: reserve_domain_name.lambda_handler
+      Events:
+        ReserveDomainName:
+          Type: Api
+          Properties:
+            Path: /instances/reserve-domain-name
+            Method: POST
+  ListReserveDomainNamesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: arn:aws:iam::829898772826:role/Sam-application-lambda-role
+      Handler: list_reserved_domain_names.lambda_handler
+      Events:
+        ReserveDomainName:
+          Type: Api
+          Properties:
+            Path: /instances/reserved-names
+            Method: GET
+#Outputs:
+#  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+#  # Find out more about other implicit resources you can reference within SAM
+#  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+#  HelloWorldApi:
+#    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+#    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+#  HelloWorldFunction:
+#    Description: "Hello World Lambda Function ARN"
+#    Value: !GetAtt HelloWorldFunction.Arn
+#  HelloWorldFunctionIamRole:
+#    Description: "Implicit IAM Role created for Hello World function"
+#    Value: !GetAtt HelloWorldFunctionRole.Arn
