@@ -1,0 +1,180 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "sub-domain-service-final"
+host: "f6jz3rblo7.execute-api.us-west-1.amazonaws.com"
+basePath: "/v1"
+schemes:
+- "https"
+paths:
+  /instances/check-domain-name:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "DomainNameAvailabilityRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/DomainNameAvailabilityRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DomainNameAvailabilityResponse"
+      security:
+      - api_key: []
+  /instances/redis/status:
+    get:
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/RedisStatusResponse"
+  /instances/reserve-domain-name:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ReserveSubDomainName"
+        required: true
+        schema:
+          $ref: "#/definitions/ReserveSubDomainName"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/ReserveSubDomainNameResponse"
+      security:
+      - api_key: []
+  /instances/reserved-names:
+    get:
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/ListReservedSubDomainName"
+      security:
+      - api_key: []
+  /instances/status:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "GetInstanceStatusRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/GetInstanceStatusRequest"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetInstanceStatusResponse"
+      security:
+      - api_key: []
+  /instances/test/{path_name}:
+    get:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "path_name"
+        in : "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/TestResponse"
+      security:
+      - api_key: []
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
+definitions:
+  ReserveSubDomainName:
+    type: "object"
+    properties:
+      sub_domain_name:
+        type: "string"
+    description: "get instance status associated with the given sub_domain_name "
+  ReserveSubDomainNameResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      reserved:
+        type: "boolean"
+      region:
+        type: "string"
+      subDomainName:
+        type: "string"
+      uuid:
+        type: "string"
+    description: "reserving sub_domain_name"
+  TestResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      sub_domain_name:
+        type: "string"
+    description: "for testing test endpoint"
+  RedisStatusResponse:
+    type: "object"
+    properties:
+      isConnected:
+        type: "boolean"
+    description: "get redis connection status"
+  GetInstanceStatusRequest:
+    type: "object"
+    required:
+    - "sub_domain_name"
+    properties:
+      sub_domain_name:
+        type: "string"
+    description: "get instance status associated with the given sub_domain_name "
+  DomainNameAvailabilityResponse:
+    type: "object"
+    properties:
+      isAvailable:
+        type: "boolean"
+    description: "check domain name availability"
+  GetInstanceStatusResponse:
+    type: "array"
+    description: "get instance status associated with the given sub_domain_name "
+    items:
+      type: "object"
+      properties:
+        color:
+          type: "string"
+        name:
+          type: "string"
+  ListReservedSubDomainName:
+    type: "array"
+    description: "List reserved sub domain names"
+    items:
+      type: "string"
+  DomainNameAvailabilityRequest:
+    type: "object"
+    required:
+    - "sub_domain_name"
+    properties:
+      sub_domain_name:
+        type: "string"
+    description: "check domain name availability"

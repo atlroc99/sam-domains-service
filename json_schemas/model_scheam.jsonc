@@ -41,6 +41,7 @@
 }
 
 // // Model name: GetInstanceStatusRequest
+// application/json
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "description": "get instance status associated with the given sub_domain_name ",
@@ -53,7 +54,7 @@
     "required": ["sub_domain_name"]
 }
 // application/json
-// Model name: GetInstanceStatusRequest
+// Model name: GetInstanceStatusResponse
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "description": "get instance status associated with the given sub_domain_name ",
@@ -72,6 +73,7 @@
 }
 
 // Redis Status Response:
+// application/json
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "description": "get redis connection status",
@@ -84,6 +86,7 @@
 }
 
 // ModelName: ReserveSubDomainName
+// application/json
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "description": "get instance status associated with the given sub_domain_name ",
@@ -96,6 +99,7 @@
 }
 
 // ModelName: ReserveSubDomainNameResponse
+// application/json
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "description": "reserving sub_domain_name",
@@ -119,3 +123,13 @@
     }
 }
 
+// ModelName:  ListReserveDomains
+// applicatino/json
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "List reserved sub domain names",
+    "type": "array",
+    "items": {
+        "type": "string"
+    }
+ }

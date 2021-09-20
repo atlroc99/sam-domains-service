@@ -2,7 +2,7 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "test-sam-sub-domain-service"
+stack_name = "sub-domain-service"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1hmtdgwq8nx6r"
 s3_prefix = "test-sam-sub-domain-service"
 region = "us-west-1"
